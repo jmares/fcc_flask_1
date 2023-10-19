@@ -50,3 +50,24 @@ flask --app market run --debug
 ```
 
 In debug mode you don't need to restart the server to see the changes you made.
+
+Create a second page:
+
+```python
+@app.route('/about')
+def about_page():
+    return '<h1>Hello, World!</h1><h2>This Site</h2><p>Lorum ipsum ...</p><h2>The Owner</h2><p>Lorum ipsum ...</p>'
+```
+
+Turn add a third dynamic route/page:
+
+```python
+@app.route('/about')
+def about_page():
+    return f'<h1>About</h1><h2>This Site</h2><p>Lorum ipsum ...</p>'
+
+@app.route('/about/<username>')
+def about_dpage(username):
+    return f'<h1>About</h1><h2>{username}</h2><p>Lorum ipsum ...</p>'
+```
+

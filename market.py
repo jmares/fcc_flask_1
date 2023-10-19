@@ -7,4 +7,8 @@ def hello_world():
 
 @app.route('/about')
 def about_page():
-    return '<h1>Hello, World!</h1><h2>This Site</h2><p>Lorum ipsum ...</p><h2>The Owner</h2><p>Lorum ipsum ...</p>'
+    return f'<h1>About</h1><h2>This Site</h2><p>Lorum ipsum ...</p>'
+
+@app.route('/about/<username>')
+def about_dpage(username):
+    return f'<h1>About</h1><h2>{username}</h2><p>Lorum ipsum ...</p>'
