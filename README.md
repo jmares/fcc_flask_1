@@ -15,9 +15,9 @@ Make a website where you can buy and sell stuff.
 
 If you want to see the code for the lesson, use the corresponding tag to switch to that version.
 
-## Lesson 01 - Introduction
+### Lesson 01 - Introduction
 
-Using VSCode, create a virtual environment for this project. Ia m currently using Windows 11 with Python 3.11.2.
+Using VSCode, create a virtual environment for this project. I am currently using Windows 11 with Python 3.11.2.
 
 Install dependencies
 
@@ -42,3 +42,11 @@ To execute the script:
 ```shell
 flask --app market run
 ```
+
+Debug mode:
+
+```shell
+flask --app market run --debug
+```
+
+In debug mode you don't need to restart the server to see the changes you made.
