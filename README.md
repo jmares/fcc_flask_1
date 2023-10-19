@@ -11,5 +11,34 @@ Project based on the FreeCodeCamp Flask tutorial:
 
 Make a website where you can buy and sell stuff.
 
+## Lessons
 
+If you want to see the code for the lesson, use the corresponding tag to switch to that version.
 
+## Lesson 01 - Introduction
+
+Using VSCode, create a virtual environment for this project. Ia m currently using Windows 11 with Python 3.11.2.
+
+Install dependencies
+
+```shell
+pip install flask
+```
+
+Test whether Flask is installed correctly:
+
+```shell
+flask --version
+```
+
+```
+Python 3.11.2
+Flask 3.0.0
+Werkzeug 3.0.0
+```
+
+To execute the script:
+
+```shell
+flask --app market run
+```
