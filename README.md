@@ -71,3 +71,5 @@ def about_dpage(username):
     return f'<h1>About</h1><h2>{username}</h2><p>Lorum ipsum ...</p>'
 ```
 
+### Lesson 02 - Styling and Templates
+
