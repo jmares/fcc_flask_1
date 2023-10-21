@@ -73,3 +73,71 @@ def about_dpage(username):
 
 ### Lesson 02 - Styling and Templates
 
+Mostly introduction to Bootstrap.
+
+### Lesson 3 - Sending Data to Templates
+
+**Jinja2 template**
+
+Example:
+
+A simple example:
+
+In `market.py`:
+
+```python
+@app.route('/market')
+def market_pafe():
+    return render_template('market.html', item_name='Phone')
+```
+
+In `market.html`:
+
+```html
+<p>{{ item_name }}</p>
+```
+
+A less simple example:
+
+In `market.py`:
+
+```python
+@app.route('/market')
+def market_pafe():
+    items = [
+        {'id': 1, 'name': 'Phone', 'barcode': '893212299897', 'price': 500},
+        {'id': 2, 'name': 'Laptop', 'barcode': '123985473165', 'price': 900},
+        {'id': 3, 'name': 'Keyboard', 'barcode': '231985128446', 'price': 150}
+    ]
+    return render_template('market.html', items=items)
+```
+
+In `market.html`:
+
+```html
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Barcode</th>
+            <th scope="col">Price</th>
+            <th scope="col">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.barcode }}</td>
+                <td>{{ item.price }}$</td>
+                <td>
+                    <button class="btn btn-outline btn-info">More Info</button>
+                    <button class="btn btn-outline btn-success">Purchase this Item</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+```
