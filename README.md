@@ -73,7 +73,7 @@ def about_dpage(username):
 
 ### Lesson 02 - Styling and Templates
 
-Mostly introduction to Bootstrap.
+Mostly an introduction to Bootstrap.
 
 ### Lesson 3 - Sending Data to Templates
 
@@ -141,3 +141,14 @@ In `market.html`:
     </tbody>
 </table>
 ```
+
+### Lesson 04 - Template Inheritance
+
+The idea is to have 1 base HTML template on which all other HTML templates are based. Less copying and pasting, easier maintenance.
+
+Don't hardcode links in the navbar, but use the Flask function `url_for()` to refer to the route:
+
+```html
+<a class="nav-link" href="{{ url_for('market_page') }}">Market</a>
+```
+
