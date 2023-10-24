@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Project based on the FreeCodeCamp Flask tutorial:
+Project based on a FreeCodeCamp Flask tutorial:
 
 - **YouTube**: [Flask Course - Python Web Application Development](https://www.youtube.com/watch?v=Qr4QMBUPxWo)
 - **Date**: 10/03/2021
@@ -152,3 +152,103 @@ Don't hardcode links in the navbar, but use the Flask function `url_for()` to re
 <a class="nav-link" href="{{ url_for('market_page') }}">Market</a>
 ```
 
+### Lesson 05 - Models and Databases
+
+Working with a SQLite3 database.
+
+Install SQLAlchemy
+
+```shell
+pip install flask-sqlalchemy
+```
+
+Creating the database:
+
+```python
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
+db = SQLAlchemy(app)
+```
+
+Creating a model that will become a table in the database:
+
+```python
+class Item(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(length=30), nullable=False, unique=True)
+    price = db.Column(db.Integer(), nullable=False)
+    barcode = db.Column(db.String(length=12), nullable=False, unique=True)
+    description = db.Column(db.String(length=1024), nullable=False, unique=True)
+```
+
+Creating the database and adding an item manually via a python shell. You have to open the python shell in the directory that also contains `market.py`.
+The method the author used, didn't work on my computer. The DB file also ended up in the `instance` directory instead of the current directory.
+
+In the python shell (this is different from the video, but with the same results):
+
+```python
+>>> from market import app
+>>> from market import db
+>>> with app.app_context():
+...     db.create_all()
+...
+>>> from market import Item
+>>> item1 = Item(name='iPhone 10', price=500, barcode='846154104831', description='description for the iPhone 10')
+>>> with app.app_context():
+...     db.session.add(item1) 
+...     db.session.commit()
+...
+>>> with app.app_context():
+...     Item.query.all()    
+...
+[Item iPhone 10]
+>>> item2 = Item(name='Laptop', price=600, barcode='321912987542', description='description for the laptop')       
+>>> with app.app_context():
+...     db.session.add(item2)
+...     db.session.commit()
+...     Item.query.all()
+...
+[Item iPhone 10, Item Laptop]
+>>> with app.app_context():
+...     for item in Item.query.all():
+...             item.id
+...             item.name
+...             item.price
+...             item.barcode
+...             item.description
+...
+1
+'iPhone 10'
+500
+'846154104831'
+'description for the iPhone 10'
+2
+'Laptop'
+600
+'321912987542'
+'description for the laptop'
+>>> with app.app_context():
+...     Item.query.filter_by(price=500)  
+...
+<flask_sqlalchemy.query.Query object at 0x0000022A1BC69850>
+>>> with app.app_context():
+...     for item in Item.query.filter_by(price=500):
+...             item.name
+...
+'iPhone 10'
+```
+
+Exit from the python shell with `exit()` or `quit()`.
+
+And start the app:
+
+```shell
+flask --app market run --debug
+```
+
+
+## To Study
+
+Learn more about
+
+- Jinja
+- SQLAlchemy
