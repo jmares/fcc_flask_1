@@ -245,6 +245,43 @@ And start the app:
 flask --app market run --debug
 ```
 
+### Lesson 06 - Project Restructure
+
+Porblem is to avoid circular imports: packages.
+
+- Create the main application file: `run.py`
+- Move imports and app and db initialization from `market.py` to `run.py`
+- Move routes from `market.py` to `routes.py`
+- Move `class Item` from `market.py` to `models.py`
+- Delete `market.py`
+- Create directory `market`
+- Move files `routes.py` and `models.py` into the `market` directory
+- Move directory `templates` into the `market` directory
+- In `market` directory, create file `__init__.py`
+- Move contents from `run.py` to `__init__.py`
+- Add following code to `run.py`:
+
+```python
+from market import app
+
+# Checks if the run.py file has executed directly and not imported
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+- Running the app via `python .\run.py`, will result in page not found error
+- Add the line `from market import routes` to `__init__.py`
+- Running app now will result in error: `NameError: name 'app' is not defined`
+- Insert the following lines at the top of the file `routes.py`:
+    - `from market import app`
+    - `from flask import render_template`
+    - `from market.models import Item`
+- Insert the following lines at the top of the file `models.py`:
+    - `from market import db`
+
+Contrary to the tutorial the database in my project was created in a directory `instance` instead of the working directory. And I have to keep it there, I cannot move the directory and the database into the `market` directory. Problem to be solved later.
+
+
 
 ## To Study
 
@@ -252,3 +289,4 @@ Learn more about
 
 - Jinja
 - SQLAlchemy
+- Can I specify the location of the database instead of using the default location in an `instance` directory?
