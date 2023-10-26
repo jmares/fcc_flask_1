@@ -281,7 +281,81 @@ if __name__ == "__main__":
 
 Contrary to the tutorial the database in my project was created in a directory `instance` instead of the working directory. And I have to keep it there, I cannot move the directory and the database into the `market` directory. Problem to be solved later.
 
+### Lesson 07 - Model Relationships
 
+Model for users:
+
+```python
+class User (db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    username = db.Column(db.String(length=30), nullable=False, unique=True)
+    email_address = db.Column(db.String(length=50), nullable=False, unique=True)
+    password_hash = db.Column(db.String(length=60), nullable=False)
+    budget = db.Column(db.Integer(), nullable=False, default=1000)
+    items = db.relationship('Item', backref='owned_user', lazy=True)
+```
+
+Modified model for items:
+
+```python
+class Item(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(length=30), nullable=False, unique=True)
+    price = db.Column(db.Integer(), nullable=False)
+    barcode = db.Column(db.String(length=12), nullable=False, unique=True)
+    description = db.Column(db.String(length=1024), nullable=False, unique=True)
+    owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
+```
+
+After adding the model for users, the database had to be recreated. The code was different from the video. Open a python shell in the directory of the repository. The difference is that I have to use `with app.app_context():`.
+
+```python
+>>> from market.models import db
+>>> from market.routes import app 
+>>> with app.app_context():
+...     db.drop_all() 
+...     db.create_all()
+...
+>>> from market.models import User, Item
+>>> u1 = User(username='jsc', password_hash='123456', email_address='jsc@jsc.com')
+>>> with app.app_context():
+...     db.session.add(u1)
+...     db.session.commit()
+...
+>>> with app.app_context(): 
+...     User.query.all()    
+...
+[<User 1>]
+>>> i1 = Item(name='iPhone 10', description='description for the iPhone', barcode='1234567890123', price=800)
+>>> i2 = Item(name='Laptop', description='description for the laptop', barcode='0123456789123', price=1000)   
+>>> with app.app_context():
+...     db.session.add(i1)
+...     db.session.add(i2)
+...     db.session.commit()
+...
+>>> with app.app_context():
+...     Item.query.all()    
+...
+[Item iPhone 10, Item Laptop]
+>>> with app.app_context():
+...     item1 = Item.query.filter_by(name='iPhone 10').first()   
+...     item1.barcode
+...     item1.owner       # empty, not yet specified
+...
+'1234567890123'
+>>> with app.app_context():
+...     item1.owner = User.query.filter_by(username='jsc').first().id
+...     db.session.add(item1)
+...     db.session.commit()
+...     item1.owner
+...
+1
+>>> with app.app_context():
+...     i = Item.query.filter_by(name='iPhone 10').first()
+...     i.owned_user
+...
+<User 1>
+```
 
 ## To Study
 
