@@ -357,10 +357,39 @@ After adding the model for users, the database had to be recreated. The code was
 <User 1>
 ```
 
+### Lesson 08 - Flask Forms
+
+Install WT Forms
+
+```shell
+pip install flask-wtf
+```
+
+Creating a secret key for the forms. Open a python shell:
+
+```python
+>>> import os
+>>> os.urandom(12).hex() 
+'8e119499f4ecb2216ba55520'
+```
+
+### Lesson 09 - Flask Validation
+
+Install email validator:
+
+```shell
+pip install email_validator
+```
+
+Validators must always be a list.
+
+Flask also includes the validators (min and max length) in the HTML5 input element, so a first validation occurs there.
+
 ## To Study
 
 Learn more about
 
 - Jinja
 - SQLAlchemy
+- WTForms
 - Can I specify the location of the database instead of using the default location in an `instance` directory?
