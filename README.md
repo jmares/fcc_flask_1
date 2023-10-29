@@ -385,6 +385,17 @@ Validators must always be a list.
 
 Flask also includes the validators (min and max length) in the HTML5 input element, so a first validation occurs there.
 
+### Lesson 10 - Flash Messages and Advanced Validations
+
+```python
+def validate_username(self, username_to_check):
+```
+
+Both parts of the method name are important. 
+
+- `validate`: The class will look for methods starting with this word
+- `username`: and apply them on field equal to the second word
+
 ## To Study
 
 Learn more about
