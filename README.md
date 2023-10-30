@@ -396,6 +396,30 @@ Both parts of the method name are important.
 - `validate`: The class will look for methods starting with this word
 - `username`: and apply them on field equal to the second word
 
+### Lesson 11 - User Authentication Part 1
+
+Passwords are not stored encrypted in the database.
+
+```shell
+pip install flask_bcrypt
+```
+
+In file `__init__.py` add:
+
+```python
+...
+from flask_bcrypt import Bcrypt
+...
+bcrypt = Bcrypt(app)
+```
+
+At the end of part 1:
+
+```shell
+pip install flask_login
+```
+
+
 ## To Study
 
 Learn more about
