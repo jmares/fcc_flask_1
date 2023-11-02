@@ -419,6 +419,72 @@ At the end of part 1:
 pip install flask_login
 ```
 
+### Lesson 12 - User Authentication Part 2
+
+Halfway through this lesson, you will get an error:
+
+```shell
+ImportError: cannot import name 'url_decode' from 'werkzeug.urls' (C:\Users\johan\Projects\fcc_flask_1\.venv\Lib\site-packages\werkzeug\urls.py)
+```
+
+In order for this to work you will to downgrade Flask and WerkZeug
+
+Flask
+
+```shell
+pip uninstall Flask
+pip install Flask==2.3.0 
+```
+
+Werkzeug
+
+```shell
+pip uninstall Werkzeug 
+pip install WerkZeug==2.3.0
+```
+
+> **Tip**
+>
+> If you want to see the code of something you imported in VS Code, for example of `UserMixin` in `from flask_login import UserMixin`.  
+> Move cursor to `UserMixin` and press `F12`.
+
+The Font Awesome link for the _coins_ icon doens't work. My workaround:
+
+At the bottom of the page, replace
+
+```html
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+```
+
+with
+
+```html
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+```
+
+In the `navbar`, replace
+
+```html
+<li class="nav-item">
+    <a class="nav-link" style="color:lawngreen; font-weight: bold;">
+        <i class="fas fa-coins"></i>
+        {{ current_user.budget }}
+    </a>
+</li>
+```
+
+with
+
+```html
+<li class="nav-item">
+    <a class="nav-link" style="color:lawngreen; font-weight: bold;">
+        <iconify-icon icon="la:coins" width="24" style="vertical-align: middle;"></iconify-icon>
+        {{ current_user.budget }}
+    </a>
+</li>
+```
+
+PS: `{{ current_user.budget }}` is later replaced by `{{ current_user.prettier_budget }}`
 
 ## To Study
 
