@@ -427,7 +427,7 @@ Halfway through this lesson, you will get an error:
 ImportError: cannot import name 'url_decode' from 'werkzeug.urls' (C:\Users\johan\Projects\fcc_flask_1\.venv\Lib\site-packages\werkzeug\urls.py)
 ```
 
-In order for this to work you will to downgrade Flask and WerkZeug
+In order for this to work you will have to downgrade Flask and WerkZeug
 
 Flask
 
@@ -485,6 +485,15 @@ with
 ```
 
 PS: `{{ current_user.budget }}` is later replaced by `{{ current_user.prettier_budget }}`
+
+### Lesson 13 - Logout and Customizations
+
+Note the changes that were made to `routes.py` and `__init__.py`:
+
+- `login_manager.login_view`
+- `login_manager.login_message_category`
+- `@login_required`
+
 
 ## To Study
 
