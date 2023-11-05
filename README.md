@@ -494,6 +494,9 @@ Note the changes that were made to `routes.py` and `__init__.py`:
 - `login_manager.login_message_category`
 - `@login_required`
 
+### Lesson 14 - Item Purchasing Part 1
+
+- For more information on **modals**: [Bootstrap 4 - Modal](https://getbootstrap.com/docs/4.0/components/modal/)
 
 ## To Study
 
