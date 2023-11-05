@@ -11,6 +11,43 @@ Project based on a FreeCodeCamp Flask tutorial:
 
 Make a website where you can buy and sell stuff.
 
+## Review
+
+- An excellent Flask tutorial. 
+- A great introduction to Flask.
+- Required: some basic Python knowledge.
+- Even though the tutorial is only 2 years old, I had to make some changes including downgrading some packages, which I documented in the lessons below.
+
+## Database
+
+The final database schema:
+
+```sql
+CREATE TABLE user (
+        id INTEGER NOT NULL,
+        username VARCHAR(30) NOT NULL,
+        email_address VARCHAR(50) NOT NULL,
+        password_hash VARCHAR(60) NOT NULL,
+        budget INTEGER NOT NULL,
+        PRIMARY KEY (id),
+        UNIQUE (username),
+        UNIQUE (email_address)
+);
+CREATE TABLE item (
+        id INTEGER NOT NULL,
+        name VARCHAR(30) NOT NULL,
+        price INTEGER NOT NULL,
+        barcode VARCHAR(12) NOT NULL,
+        description VARCHAR(1024) NOT NULL,
+        owner INTEGER,
+        PRIMARY KEY (id),
+        UNIQUE (name),
+        UNIQUE (barcode),
+        UNIQUE (description),
+        FOREIGN KEY(owner) REFERENCES user (id)
+);
+```
+
 ## Lessons
 
 If you want to see the code for the lesson, use the corresponding tag to switch to that version.
