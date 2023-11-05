@@ -498,6 +498,23 @@ Note the changes that were made to `routes.py` and `__init__.py`:
 
 - For more information on **modals**: [Bootstrap 4 - Modal](https://getbootstrap.com/docs/4.0/components/modal/)
 
+### Lesson 15 - Item Purchasing Part 2
+
+If you want to test the data you got via a form, before adding more logic (in `def Market_page()`):
+
+```python
+if purchase_form.validate_on_submit():
+    print(purchase_form.__dict__)
+```
+
+One key is of interest to us: `"submit"`:
+
+```python
+if purchase_form.validate_on_submit():
+    print(purchase_form.__dict__['submit'])
+```
+
+
 ## To Study
 
 Learn more about
